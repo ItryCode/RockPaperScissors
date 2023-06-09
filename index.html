@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+let choices=['Rock','Paper','Scissors']        
+
+
+function computerSelection(){
+    let computerChoices=Math.floor(Math.random()*3);
+    return choices[computerChoices]
+}
+
+
+
+
+function game()
+{
+    let userSelect=prompt("Choose between rock,paper and scissors");
+    let compSelect=computerSelection();
+    if(userSelect.toLowerCase()==compSelect.toLowerCase())
+    {
+        return 'none'
+    }
+    else if(userSelect.toLowerCase()=='paper' && compSelect.toLowerCase()=='rock'||
+        userSelect.toLowerCase()=='scissors' && compSelect.toLowerCase()=='paper'||
+        userSelect.toLowerCase()=='rock' && compSelect.toLowerCase()=='scissors')
+    {
+        return 'u'
+    }
+    else
+    { 
+        return 'c'
+    }
+
+
+}   
+
+let userPoint=0;
+let compPoint=0;
+let flag;
+
+for(let i=0;i<5;i++)
+{
+    flag=game();
+    if (flag=='u'){
+        ++userPoint;
+        console.log(userPoint);
+    }
+    else if(flag=='c')
+    {
+        ++compPoint;
+        console.log(compPoint);
+    }else
+    {
+        alert('ITS A TIE!');
+    }
+}
+
+if (userPoint==compPoint){
+    alert("IT'S A TIE!");
+}
+
+else if(userPoint>compPoint){
+    alert("Congratulations!You have won!");
+}
+else{
+    alert("The computer has won!")
+}
+
+    </script>
+</body>
+</html>
