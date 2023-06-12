@@ -7,11 +7,26 @@
     <title>Document</title>
 </head>
 <body>
+
+    <button id="rock" value="rock">ROCK</button>
+    <button id="paper" value="paper">PAPER</button>
+    <button id="scissors" value="scissors">SCISSORS</button>
+    <div class='result'></div>
+
     <script>
-let choices=['Rock','Paper','Scissors']        
+        const userBtn=document.querySelector("#rock");
+        const paperBtn=document.querySelector("#paper");
+        const scissorsBtn=document.querySelector("#scissors");
+        const results=document.querySelector(".result");
+        userBtn.addEventListener('click',game);
+        paperBtn.addEventListener('click',game);
+        scissorsBtn.addEventListener('click',game);
+
+       
 
 
 function computerSelection(){
+    let choices=['Rock','Paper','Scissors'] 
     let computerChoices=Math.floor(Math.random()*3);
     return choices[computerChoices]
 }
@@ -19,59 +34,82 @@ function computerSelection(){
 
 
 
+let userPoint=0;
+let compPoint=0;
+
+
 function game()
 {
-    let userSelect=prompt("Choose between rock,paper and scissors");
+    let userSelect=this.value;
+    console.log(this.value)
     let compSelect=computerSelection();
     if(userSelect.toLowerCase()==compSelect.toLowerCase())
     {
-        return 'none'
+        return results.innerHTML='TIE!'
     }
     else if(userSelect.toLowerCase()=='paper' && compSelect.toLowerCase()=='rock'||
         userSelect.toLowerCase()=='scissors' && compSelect.toLowerCase()=='paper'||
         userSelect.toLowerCase()=='rock' && compSelect.toLowerCase()=='scissors')
     {
-        return 'u'
-    }
+        userPoint++;
+        results.innerHTML=`User now has ${userPoint} points`
+        if(userPoint==5){
+            let winner=userPoint;
+            userPoint=0;
+            compPoint=0;
+            return results.innerHTML=`User now has ${winner} points and has won!`
+           
+        }
+        return
+    }   
     else
     { 
-        return 'c'
+        compPoint++;
+        results.innerHTML=`The computer now has ${compPoint} points`
+        if(compPoint==5){
+            let winner=compPoint;
+            userPoint=0;
+            compPoint=0;
+            return results.innerHTML=`The computer now has ${winner} points and has won!`
+            
+        }
+        return
     }
 
 
 }   
 
-let userPoint=0;
-let compPoint=0;
-let flag;
+// let userPoint=0;
+// let compPoint=0;
+// let flag;
 
-for(let i=0;i<5;i++)
-{
-    flag=game();
-    if (flag=='u'){
-        ++userPoint;
-        console.log(userPoint);
-    }
-    else if(flag=='c')
-    {
-        ++compPoint;
-        console.log(compPoint);
-    }else
-    {
-        alert('ITS A TIE!');
-    }
-}
+// // for(let i=0;i<5;i++)
+// // {
+//     flag=game();
+//     if (flag=='u'){
+//         ++userPoint;
+//         console.log(userPoint);
+//     }
+//     else if(flag=='c')
+//     {
+//         ++compPoint;
+//         console.log(compPoint);
+//     }else
+//     {
+//         alert('ITS A TIE!');
+//     }
+// }
 
-if (userPoint==compPoint){
-    alert("IT'S A TIE!");
-}
+// if (userPoint==compPoint){
+//     alert("IT'S A TIE!");
+// }
 
-else if(userPoint>compPoint){
-    alert("Congratulations!You have won!");
-}
-else{
-    alert("The computer has won!")
-}
+// else if(userPoint>compPoint){
+//     alert("Congratulations!You have won!");
+// }
+// else{
+//     alert("The computer has won!")
+// }
 
     </script>
 </body>
